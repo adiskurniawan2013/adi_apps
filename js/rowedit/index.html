@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Row Editor Example</title>
+
+<!--CSS-->
+<!-- Source File -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.3.0/build/base/base-min.css" />
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.3.0/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.3.0/build/container/assets/skins/sam/container.css" />  
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.3.0/build/calendar/assets/skins/sam/calendar.css" />
+
+    
+<script type="text/javascript" src="http://yui.yahooapis.com/2.3.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.3.0/build/element/element-beta-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.3.0/build/datasource/datasource-beta-min.js"></script>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.3.0/build/connection/connection-min.js"></script>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.3.0/build/dragdrop/dragdrop-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.3.0/build/container/container-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.3.0/build/calendar/calendar-min.js"></script>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.3.0/build/datatable/datatable-beta-min.js"></script>
+
+<script type="text/javascript" src="DataTablePatches.js"></script>
+<script type="text/javascript" src="rowEdit.js"></script>
+
+
+<style type="text/css">
+	/* these two classes are used to display checkboxes.  formatCheckbox does not fill the cell, it just
+	   sets the class of the container cell to one of these two
+	*/
+	.yui-dt-checkedbox {
+		background: transparent  url(checked.gif) no-repeat center center;
+	}
+	
+	.yui-dt-uncheckedbox {
+		background: transparent  url(unchecked.gif) no-repeat center center;
+	}
+	
+	/* This one puts a down arrow on the right hand side of the cell to indicate it can be openned. */
+	tbody .yui-dt-dropdown {
+		padding-right:10px;
+		background: transparent  url(dropdown.png) no-repeat right center;
+
+	}
+	
+	.yui-dt-table {
+		width:90%;
+	}
+	
+	/* these are used to format the form.  
+	   The layout for the labels and edit boxes is set here.
+	*/
+	.yui-dt-edit-form label {
+		float: left;
+		font-weight:bold;
+	}
+
+	.yui-dt-edit-form .yui-dt-edit-container {
+		margin-left:300px;
+		display:block;
+		text-align:left;
+		padding-top:10px;
+	}
+	
+	.yui-dt-edit-form .yui-dt-edit-submit {
+		margin-top:10px;
+		margin-left:300px;
+		font-weight:bold;
+	}
+
+	</style>
+
+<script type="text/javascript">
+//<![CDATA[	
+
+YAHOO.example.dataTable = undefined;
+YAHOO.example.setDataTable = function () {
+
+// The values in the table are set here.  If you want to add rows, just do it here in the same format.
+	var dataSource = new YAHOO.util.DataSource(
+		[
+			{"textValue":"a3","checkValue":"1","dateValue":"01/02/2006","selectValue":"1"},
+			{"textValue":"b3","checkValue":"2","dateValue":"03/04/2007","selectValue":"2"}
+		]
+	);
+	
+	dataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+	dataSource.responseSchema = {
+		fields: [
+			'textValue',
+			'checkValue',
+			// Using the supplied parseDate method to convert the MDY date to a JavaScript Date object.
+			{key:'dateValue',parser:YAHOO.util.DataSource.parseDate},
+			'selectValue'
+		]
+	};
+	
+	
+	var dt = new YAHOO.widget.DataTable(
+		// name of the container
+		'Listing',
+		// Column descriptors
+		[
+			// The first one is an extra column containing the buttons to send the row to the editor.
+			{key:'edit',formatter:YAHOO.example.formatter,width:'100px'},
+			{key:'checkValue',sortable:true, resizeable:true,formatter:'checkbox',editor:'checkbox'},
+			{key:'textValue',sortable:true, resizeable:true,editor:'textarea'},
+			{key:'selectValue',sortable:true, resizeable:true,formatter:'dropdown',editor:'dropdown',dropdownOptions:[
+				// This is the list displayed in the dropdown select box.
+				{value:'0',text:'option 0'},
+				{value:'1',text:'option 1'},
+				{value:'2',text:'option 2'},
+				{value:'3',text:'option 3'}
+			]},
+			// The date value contains an extra validator function which actually converts the date in JavaScript Date format to MDY format for transmission
+			{key:'dateValue',sortable:true, resizeable:true,formatter:'date',editor:'date',editorOptions:{validator:YAHOO.example.validateDate}}
+			
+		], 
+		dataSource
+	);  
+
+	YAHOO.example.dataTable = dt;
+	
+	// This is required so the inline cell editors show up.  
+	// If you are using a row editor, it is unlikely that you would use this at the same time
+	dt.subscribe("cellClickEvent", dt.onEventShowCellEditor);  
+
+	// You don't need to subscribe to this one, but if you do, you have to return true for pass or false to fail the validation
+	dt.subscribe('cellValidateEvent', function(args) {
+		console.log('cellValidateEvent', args);
+		return true;
+	});
+	
+	// same as before.
+	dt.subscribe('formValidateEvent', function(args) {
+		console.log('formValidateEvent', args);
+		return true;
+	});
+	
+	// If you subscribe to this event, you can handle the form data in whatever way you wish. 
+	// Here I am using the supplied postEditForm, which will send the data via an async XHR post request
+	// If you don't subscribe to this, the form will be submitted as forms normally are.
+	dt.subscribe('formSubmitEvent', dt.postEditForm, {
+		success:function() {
+			console.log('success',this);
+		},
+		failure:function() {
+			console.log('failure',this);
+		}
+	});
+};
+
+// This formatter method is used for the 'extra' column.
+// IE does not provide a ev.target property for the event but a srcElement one, so that's why there are two separate calls in response to the click.
+YAHOO.example.formatter = function (elCell, oRecord, oColumn, oData) {
+	elCell.innerHTML = '<input type="button" value="click to edit" />';
+	YAHOO.util.Event.on(elCell,'click', function (ev) {
+		if (ev.target === undefined) {
+			YAHOO.example.dataTable.showEditForm(YAHOO.example.dataTable.getRecord(ev.srcElement),{IdAlumno:123});
+		} else {
+			YAHOO.example.dataTable.showEditForm(YAHOO.example.dataTable.getRecord(ev.target),{IdAlumno:123});
+		}
+	},this,this);
+
+};
+
+// This is the validation function which, by the way, converts the date into something that can be easily transmitted in the POST request.
+YAHOO.example.validateDate = function (newData, oldData) {
+	console.log('validateDate',newData,oldData);
+	if (newData instanceof Date) {
+		return (newData.getMonth() + 1 ) + '/' + newData.getDate() + '/' + newData.getFullYear();
+	} else  {
+		return null;
+	}
+};
+
+YAHOO.util.Event.onAvailable('Listing',YAHOO.example.setDataTable,YAHOO.example.setDataTable,true);
+
+    //]]>
+    </script>
+
+  </head>
+  <body  class="yui-skin-sam">
+
+	<div id="Listing"></div>
+	<input type="button" value="Create form" onClick="YAHOO.example.dataTable.createEditForm('Editor','index.html');" /> &lt;&lt;== click me first, then on a record.
+	<fieldset id="Editor">
+		<legend>Row Editor</legend>
+	</fieldset>
+	
+  </body>
+
+</html>
+
+		

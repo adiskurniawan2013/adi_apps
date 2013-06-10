@@ -1,0 +1,40 @@
+ul.accordion,
+ol.accordion {
+    margin: 0;
+    padding: 0;
+}
+.accordion li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    line-height: 180%;
+}
+.accordion li:after {
+    content: ".";
+    display: block;
+    height: 1px;
+    clear: both;
+    visibility: hidden;
+    *zoom: 1;
+}
+.accordion li li {
+    list-style-type: disc;
+    margin-left: 1em;
+}
+.accordion a {
+    color: inherit;
+    text-decoration: inherit;
+
+}
+.accordion a:hover{
+    color: #B0E0E6;
+}
+.accordion .loading {
+    display: none;
+}
+
+.sublist a:hover{
+    color: #0000CD;
+    text-decoration:underline;
+}
+

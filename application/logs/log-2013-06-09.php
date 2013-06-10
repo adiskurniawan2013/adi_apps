@@ -1,0 +1,19 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2013-06-09 15:42:10 --> 404 Page Not Found --> highslide
+ERROR - 2013-06-09 15:42:10 --> 404 Page Not Found --> css
+ERROR - 2013-06-09 15:42:10 --> 404 Page Not Found --> highslide
+ERROR - 2013-06-09 15:46:02 --> 404 Page Not Found --> highslide
+ERROR - 2013-06-09 15:46:02 --> 404 Page Not Found --> highslide
+ERROR - 2013-06-09 15:46:02 --> 404 Page Not Found --> css
+ERROR - 2013-06-09 15:46:05 --> 404 Page Not Found --> highslide
+ERROR - 2013-06-09 15:46:05 --> 404 Page Not Found --> highslide
+ERROR - 2013-06-09 15:46:05 --> 404 Page Not Found --> css
+ERROR - 2013-06-09 15:46:11 --> 404 Page Not Found --> highslide
+ERROR - 2013-06-09 15:46:11 --> 404 Page Not Found --> highslide
+ERROR - 2013-06-09 15:46:11 --> 404 Page Not Found --> css
+ERROR - 2013-06-09 06:46:14 --> Query error: Table 'adi_apps_v1.employees' doesn't exist
+ERROR - 2013-06-09 06:46:15 --> Query error: Table 'adi_apps_v1.employees' doesn't exist
+ERROR - 2013-06-09 06:46:16 --> Query error: Table 'adi_apps_v1.employees' doesn't exist
+ERROR - 2013-06-09 06:46:16 --> Query error: Table 'adi_apps_v1.employees' doesn't exist
+ERROR - 2013-06-09 06:46:16 --> Query error: Table 'adi_apps_v1.employees' doesn't exist

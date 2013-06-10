@@ -1,0 +1,173 @@
+.menu {
+	list-style: none;
+	font-size: 11px;
+	background: url(images/topnav_bg.gif) repeat-x;
+	font-family: tahoma, verdana, arial;
+	padding-left: 12px;
+	position: relative;
+	z-index: 2;
+}
+ul.topnav {
+    list-style: none;
+	margin: 0;
+	padding: 0px;
+	min-width:500px
+}
+ul.topnav li {
+	float: left;
+	margin: 0;	
+	padding: 0 15px 0 0;
+	position: relative; /*--Declare X and Y axis base--*/
+}
+ul.topnav li a{
+	padding: 8px 5px;
+	color: #DCDCDC; /* fff */
+	display: block;
+	text-decoration: none;
+	float: left;
+	font-weight: bold;
+}
+ul.topnav li a:hover{
+	/*background: url(images/topnav_hover.gif) no-repeat center top; */
+	background: url(images/topnav_hover.gif) repeat-x;
+	color: #fff; /* A4CB1B */
+}
+ul.topnav li span { /*--Drop down trigger styles--*/
+	width: 17px;
+	height: 32px; 
+	float: left;
+	background: url(images/dropbox-desc-hovered.png) no-repeat center; /* subnav_btn.gif , no-repeat center top;*/
+}
+/* ul.topnav li span.subhover {background-position: center bottom; cursor: pointer;} /*--Hover effect for trigger--*/
+ul.topnav li span.subhover {background: url(images/dropbox-desc.png) no-repeat center; cursor: pointer;} /*--Hover effect for trigger--*/
+
+ul.topnav li ul.subnav {
+	list-style: none;
+	position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+	left: 0; top: 32px;
+	background: #333;
+	margin: 0; padding: 0;
+	display: none;
+	float: left;
+	width: 170px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	border: 0.2px solid #D3D3D3; /*111 */
+}
+ul.topnav li ul.subnav li{
+	margin: 0; padding: 0;
+	border-top: 0.2px solid #D3D3D3; /*--Create bevel effect-- 252525 */
+	border-bottom: 0.2px solid #D3D3D3; /*--Create bevel effect-- 444 */
+	clear: both;
+	width: 170px;
+}
+html ul.topnav li ul.subnav li a {
+	float: left;
+	width: 140px;
+	background: #26395C url(images/dropbox-desc1-hovered.png) no-repeat 5px center; /* dropdown_linkbg.gif */
+	padding-left: 25px;
+}
+html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/ 
+	/* background: #1A0066 url(images/dropbox-desc.png) no-repeat 7px center; /* dropdown_linkbg.gif */
+	/* background: url(images/topnav_hover.gif) repeat-x; */
+	background: #3E5775 url(images/dropbox-desc1.png) no-repeat 5px center;
+}
+.login_welcome {
+	color:#FFFFFF;
+	padding-top: 8px;
+	padding-right: 20px;
+	padding-bottom: 0;
+	padding-left: 0;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	font-size:12px;
+}
+.login_welcome a{
+	font-size:12px;
+	padding-left:30px;
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.login_welcome a:hover{
+	color: #A4CB1B;
+}
+
+.payroll_icon {
+    /* padding-top: 8px;
+    padding-right: 20px;
+    padding-bottom: 0;
+    padding-left: 0;
+    position: absolute; 
+    top: 10px;
+    left: 5px; 
+    */
+    padding-top: 5px;
+    padding-left: 0;
+    
+}
+
+@charset "utf-8";
+/* CSS Document */
+.sidebarmenu{
+margin:0px 20;
+padding:0;
+width:175px;
+}
+.sidebarmenu a.menuitem{
+	/* background:#555; */
+	background:url(images/sidebar_menu_top_a.gif) no-repeat center top;
+	color: #fff;
+	font-size:12px;
+	font-weight:800;
+	display: block;
+	position: relative;
+	width:170px;
+	height:31px;
+	margin:0 0 5px 0;
+	line-height:31px;
+	padding:0px 0 0 10px;
+	text-decoration: none;
+	-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+/* .sidebarmenu a.menuitem:hover{background:url(images/sidebar_menu_top_a.gif) no-repeat center top;} */
+
+.sidebarmenu a.menuitem:visited, .sidebarmenu .menuitem:active{
+color: white;
+}
+
+.sidebarmenu a.menuitem .statusicon{
+position: absolute;
+top:11px;
+right:7px;
+border: none;
+background:url(images/minus.gif);
+}
+
+.sidebarmenu div.submenu{
+background: white;
+}
+.sidebarmenu div.submenu ul{ 
+list-style-type: none;
+margin: 0;
+padding: 0 0 5px 0;
+}
+.sidebarmenu div.submenu ul li{
+border-bottom: 1px dotted #bfd1d9;
+}
+.sidebarmenu div.submenu ul li a{
+display: block;
+color: black;
+text-decoration: none;
+padding:5px 0;
+padding-left: 10px;
+}
+.sidebarmenu div.submenu ul li a:hover{
+background:#CCC;
+color: #0e4354;
+}
+

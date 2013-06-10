@@ -1,0 +1,72 @@
+ul.ia-tabs {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	height: 28px; /*--Set height of tabs--*/
+	border-bottom: 1px solid #6C5B54;
+	border-left: none;
+	width: 100%;
+	font-size:12px;
+}
+ul.ia-tabs li {
+	float: left;
+	margin: 0 0 -1px 10px;
+	padding: 0;
+	height: 27px; /*--Subtract 1px from the height of the unordered list--*/
+	line-height: 27px; /*--Vertically aligns the text within the tab--*/
+	overflow: hidden;
+	position: relative;
+	border:1px solid #6C5B54;
+	
+	background: #FAF1B5;
+}
+ul.ia-tabs li:first-child
+{
+	margin:0 0 -1px 15px;
+}
+ul.ia-tabs li a
+{
+	text-decoration: none;
+	color: #3c3f40;
+	display: block;
+	font-size: 12px;
+	padding: 0 20px;
+	border: 1px solid #fff; /*--Gives the bevel look with a 1px white border inside the list item--*/
+	outline: none;
+	
+	text-shadow: rgba(255,255,255,1) 1px 1px 0;
+}
+ul.ia-tabs li:hover
+{
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f9f9f9));
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+	background: -o-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+	background: -ms-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#f9f9f9',GradientType=0 );
+	background: linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+}
+html ul.ia-tabs li.active, html ul.ia-tabs li.active a:hover
+{ /*--Makes sure that the active tab does not listen to the hover properties--*/
+	background: #fff;
+	border-bottom: 1px solid #fff; /*--Makes the active tab look like it's connected with its content--*/
+}
+div.ia-tab-container
+{
+	border: 1px solid #6C5B54;
+	border-top: none;
+	overflow: hidden;
+	clear: both;
+	width: 100%;
+	background: #fff;
+	margin:0 0 10px 0;
+	
+	-moz-box-shadow: 0px 2px 4px -2px #aaa;
+	-webkit-box-shadow: 0px 2px 4px -2px #aaa;
+	box-shadow: 0px 2px 4px -2px #aaa;
+}
+div.tab-content {
+	padding: 20px;
+}

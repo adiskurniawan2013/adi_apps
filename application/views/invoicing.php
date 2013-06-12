@@ -69,56 +69,45 @@
 
   <div style="float:left; width:18%;">
           
-          <h3 style="margin-left:3px;">Point of Sale</h3>  
-          <ul id="accordion_pos" class="accordion">
+          <h3 style="margin-left:3px;">Invoicing</h3>  
+          <ul id="accordion_invoicing" class="accordion">
                 <li>
-                    <h3>Customers</h3>
+                    <h3>Clients</h3>
                     <ul class="panel loading">
-                        <li class="sublist"><a href="javascript:load_content('customer','#tab_loader')">List of Customers</a></li>
-                        <li class="sublist"><a href="javascript:load_content('customer/add','#tab_loader')">New Customer</a></li>
+                        <li class="sublist"><a href="javascript:load_content('customer','#tab_loader')">List of Clients</a></li>
+                        <li class="sublist"><a href="javascript:load_content('customer/add','#tab_loader')">New Client</a></li>
                         <li class="sublist"><a href="">Excel Import</a></li>
                     </ul>
                 </li>
                 <li>
-                    <h3>Suppliers</h3>
+                    <h3>Quotes</h3>
                     <ul class="panel loading">
-                        <li class="sublist"><a href="javascript:load_content('supplier','#tab_loader')">List of Suppliers</a></li>
-                        <li class="sublist"><a href="javascript:load_content('supplier/add','#tab_loader')">New Supplier</a></li>
+                        <li class="sublist"><a href="javascript:load_content('supplier','#tab_loader')">List of Quotes</a></li>
+                        <li class="sublist"><a href="javascript:load_content('supplier/add','#tab_loader')">New Quote</a></li>
                         <li class="sublist"><a href="">Excel Import</a></li>
                     </ul>
                 </li>
                 <li>
-                    <h3>Items</h3>
+                    <h3>Invoices</h3>
                     <ul class="panel loading">
-                        <li class="sublist"><a href="javascript:load_content('item','#tab_loader')">List of Items</a></li>
-                        <li class="sublist"><a href="javascript:load_content('item/add','#tab_loader')">New Item</a></li>
-                        <li class="sublist"><a href="">Excel Import</a></li>
-                        <li class="sublist"><a href="">Items Receiving</a></li>
-                        <li class="sublist"><a href="">Barcode Labels</a></li>
+                        <li class="sublist"><a href="javascript:load_content('item','#tab_loader')">List of Invoices</a></li>
+                        <li class="sublist"><a href="javascript:load_content('item/add','#tab_loader')">New Invoice</a></li>
+                        <li class="sublist"><a href="javascript:load_content('item/add','#tab_loader')">Recurring Invoices</a></li>
                     </ul>
                 </li>
                 <li>
-                    <h3>Item Kits</h3>
+                    <h3>Payments</h3>
                     <ul class="panel loading">
-                        <li class="sublist"><a href="">List of Item Kits</a></li>
-                        <li class="sublist"><a href="">New Item Kit</a></li>
-                        <li class="sublist"><a href="">Barcode Labels</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h3>Sales</h3>
-                    <ul class="panel loading">
-                        <li class="sublist"><a href="">Sales Register</a></li>
-                        <li class="sublist"><a href="">Suspended Sales</a></li>
-                        <li class="sublist"><a href="">Search Sales</a></li>
+                        <li class="sublist"><a href="">List of Payments</a></li>
+                        <li class="sublist"><a href="">Enter Payment</a></li>
                     </ul>
                 </li>
                 <li>
                     <h3>Reports</h3>
                     <ul class="panel loading">
-                        <li class="sublist"><a href="">Graphical Reports</a></li>
-                        <li class="sublist"><a href="">Summary Reports</a></li>
-                        <li class="sublist"><a href="">Detailed Reports</a></li>
+                        <li class="sublist"><a href="">Invoice Aging</a></li>
+                        <li class="sublist"><a href="">Payment History</a></li>
+                        <li class="sublist"><a href="">Sales by Client</a></li>
                     </ul>
                 </li>
             </ul>
@@ -136,7 +125,7 @@
 <script type="text/javascript" src="<?php echo base_url() ?>js/accordion/jquery.accordion.2.0.js" charset="utf-8"></script>
 
 <script type="text/javascript">
-    $('#accordion_pos').accordion({
+    $('#accordion_invoicing').accordion({
         canToggle: true
     });
     

@@ -36,7 +36,7 @@ $(document).ready(function(){
     </li>
 
     <li class="mi">
-        <a href="">Employees</a>
+        <a href="javascript:load_content('invoicing')">Invoicing</a>
     </li>
 
     <li class="mi">

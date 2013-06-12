@@ -1,11 +1,7 @@
-:focus, :active {
-outline: 0;
-border: 0;
-}
-
-a, a:visited, a:focus, a:active, a:hover{
+a:visited, a:focus, a:active, a:hover{
     outline:0 none !important;
 }
+
 
 /*!
  * Bootstrap v2.3.2

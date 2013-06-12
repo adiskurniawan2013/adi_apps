@@ -10,13 +10,31 @@ class Customer_m extends Person_m {
 		return ($query->num_rows() == 1);
 	}
 
+	// example, do not delete
+    function dt_ajax_get_all() {
+        $users_table = $this->_table;
+        $roles_table = $this->_roles_table;
+        $edit = "<a href=" . site_url('auth/change_user_info/$1') . " title='Edit'><img src=" . base_url('assets/images/icons/small/grey/create%20write.png') . " width='18' height='18' alt='edit'/></a>";
+        $lock = "<a id='del_id_$1' href='#' onclick='lockUser($1)' title='Lock' ><img src=" . base_url('assets/images/icons/small/grey/Acces%20Denied%20Sign.png') . " width='18' height='18' alt='Lock user'/></a>";
+        $this->load->helper("datatables_helper");
+        $this->datatables->select("$users_table.username as username,$users_table.email,$roles_table.name AS role_name,$users_table.banned as is_locked,$users_table.last_ip,$users_table.last_login as user_last_login,$users_table.created as user_created,$users_table.id as user_id", FALSE);
+        $this->datatables->from($this->_table);
+        $this->datatables->join($roles_table, "$roles_table.id = $users_table.role_id");
+        $this->datatables->edit_column('user_id', $edit . $lock, 'user_id');
+        $this->datatables->edit_column('is_locked', '$1', "lock_to_YN(is_locked)");
+        $this->datatables->edit_column('user_last_login', '$1', "formatdate(user_last_login)");
+        $this->datatables->edit_column('user_created', '$1', "formatdate(user_created)");
+        return $this->datatables->generate();
+    }
+    // end of example, do not delete
+
 	// Returns all the customers
 	// function get_all($limit=10000, $offset=0)
 	function get_all() {
 		$this->db->from('customers');
-		$this->db->join('people','customers.person_id=people.person_id');			
+		$this->db->join('people','customers.person_id = people.person_id');			
 		$this->db->where('deleted',0);
-		$this->db->order_by("first_name", "asc");
+		//$this->db->order_by("first_name", "asc");
 		// $this->db->limit($limit);
 		// $this->db->offset($offset);
 		// return $this->db->get();

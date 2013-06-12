@@ -6,9 +6,6 @@ class Customer extends CI_Controller {
         if (!sess_var('is_logged_in')) {
             redirect('login');
         }
-        $this->load->library('datatables');
-        $this->load->library('table');
-        $this->load->database();
     }
     
     function index() {
@@ -29,17 +26,29 @@ class Customer extends CI_Controller {
         $this->load->view("loader", $data);
     }
 
+    /*
     //function to handle callbacks
     function datatable() {
         $this->datatables->select('customers.person_id, people.first_name, customers.company_name, people.email, people.phone_number')
         ->from('customers')
         ->join('people', 'customers.person_id = people.person_id')           
         ->where('customers.deleted', 0)
-        ->unset_column('customers.person_id')
         ->add_column('Actions', get_buttons('$1', strtolower(get_class())),'customers.person_id');
 
         echo $this->datatables->generate();
     }
+
+    */
+
+    function datatable() {
+        $this->datatables->select('customers.person_id, people.first_name, customers.company_name, people.email, people.phone_number')
+        ->from('customers')
+        ->join('people', 'customers.person_id = people.person_id')           
+        ->where('customers.deleted', 0)
+        ->add_column('Actions', get_buttons('$1', strtolower(get_class())),'customers.person_id');
+
+        echo $this->datatables->generate();
+    }   
 
     function add() {
         $this->load->view("loader",array('main_content'=>"customer/edit"));

@@ -4,7 +4,7 @@ DROP SCHEMA IF EXISTS adi_apps;
 CREATE SCHEMA adi_apps;
 USE adi_apps;
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `email`, `password`, `name`) VALUES
 (1, 'adi.s.kurniawan@gmail.com', 'df252cddfb5b8f13eb8ee18fe753d87c', 'Adi Kurniawan');
 
-CREATE TABLE IF NOT EXISTS `articles` (
+CREATE TABLE `articles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `slug` varchar(100) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
 INSERT INTO `articles` (`id`, `title`, `slug`, `pubdate`, `body`, `created`, `modified`) VALUES
 (1, 'tes', '', '2013-06-07', '<p>tes</p>', '2013-06-07 11:39:45', '2013-06-07 11:39:53');
 
-CREATE TABLE IF NOT EXISTS `ci_sessions` (
+CREATE TABLE `ci_sessions` (
   `session_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `ip_address` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `user_agent` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
 ('7fca71c9861d3eb85dead6f73ab37c7f', '::1', 'Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0', 1370594858, 'a:5:{s:9:"user_data";s:0:"";s:4:"name";s:0:"";s:5:"email";s:25:"adi.s.kurniawan@gmail.com";s:2:"id";s:1:"1";s:8:"loggedin";b:1;}');
 
-CREATE TABLE IF NOT EXISTS `pages` (
+CREATE TABLE `pages` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `slug` varchar(100) NOT NULL,
@@ -73,7 +73,7 @@ INSERT INTO `app_config` (`key`, `value`) VALUES
 
 CREATE TABLE customers (
   person_id int(10) NOT NULL,
-  company_name varchar(255) NOT NULL,
+  company_name varchar(255) DEFAULT NULL,
   account_number varchar(255) DEFAULT NULL,
   taxable int(1) NOT NULL DEFAULT '1',
   deleted int(1) NOT NULL DEFAULT '0',

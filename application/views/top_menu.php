@@ -24,7 +24,7 @@ $(document).ready(function(){
 <ul class="topnav">
     
     <li>
-        <a href="http://www.freelogoservices.com/" target="_blank" style="padding:0; margin-top:4.5px; margin-left:35px"><img src="<?php echo base_url()?>images/logo.png" height="22"/></a>
+        <a href="http://www.freelogoservices.com/" target="_blank" style="padding:0; margin-top:6px; margin-left:35px"><img src="<?php echo base_url()?>images/logo.png" height="22"/></a>
     </li>   
     
     <li>

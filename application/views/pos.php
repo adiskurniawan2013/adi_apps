@@ -30,32 +30,37 @@
                     color:                  #fff;
                     display:                block;
                     font-style:             normal;
+                    font-size:              13px;
                     margin:                 0;
                     padding:                10px 10px;
                     text-shadow:            0 -1px 2px #333, #ccc 0 1px 2px;
                 }
-                    .accordion li.active h3 a {
-                        background:             #369;
-                        background:             #369 -webkit-gradient(linear, left top, left bottom, from(#69c), to(#369)) no-repeat;
-                        background:             #369 -moz-linear-gradient(top,  #69c,  #369) no-repeat;
-                        border-bottom:          1px solid #036;
-                        border-top:             1px solid #9cf;
-                        text-shadow:            0 -1px 2px #036, #9cf 0 1px 2px;
-                    }
-                    .accordion li.locked h3 a {
-                        background:             #963;
-                        background:             #963 -webkit-gradient(linear, left top, left bottom, from(#c96), to(#963)) no-repeat;
-                        background:             #963 -moz-linear-gradient(top,  #c96,  #963) no-repeat;
-                        border-bottom:          1px solid #630;
-                        border-top:             1px solid #fc9;
-                        text-shadow:            0 -1px 2px #630, #fc9 0 1px 2px;
-                    }
+                .accordion li.active h3 a {
+                    background:             #369;
+                    background:             #369 -webkit-gradient(linear, left top, left bottom, from(#69c), to(#369)) no-repeat;
+                    background:             #369 -moz-linear-gradient(top,  #69c,  #369) no-repeat;
+                    border-bottom:          1px solid #036;
+                    border-top:             1px solid #9cf;
+                    text-shadow:            0 -1px 2px #036, #9cf 0 1px 2px;
+                    font-size:              13px;
+                }
+                .accordion li.locked h3 a {
+                    background:             #963;
+                    background:             #963 -webkit-gradient(linear, left top, left bottom, from(#c96), to(#963)) no-repeat;
+                    background:             #963 -moz-linear-gradient(top,  #c96,  #963) no-repeat;
+                    border-bottom:          1px solid #630;
+                    border-top:             1px solid #fc9;
+                    text-shadow:            0 -1px 2px #630, #fc9 0 1px 2px;
+                    font-size:              13px;
+                }
                 .accordion li h3 {
                     margin:         0;
                     padding:        0;
+                    font-size:              13px;
                 }
                 .accordion .panel {
                     padding:        7px;
+                    font-size:              13px;
                 }
         </style>
 
@@ -85,8 +90,8 @@
                 <li>
                     <h3>Items</h3>
                     <ul class="panel loading">
-                        <li class="sublist"><a href="">List of Items</a></li>
-                        <li class="sublist"><a href="">New Item</a></li>
+                        <li class="sublist"><a href="javascript:load_content('item','#tab_loader')">List of Items</a></li>
+                        <li class="sublist"><a href="javascript:load_content('item/add','#tab_loader')">New Item</a></li>
                         <li class="sublist"><a href="">Excel Import</a></li>
                         <li class="sublist"><a href="">Items Receiving</a></li>
                         <li class="sublist"><a href="">Barcode Labels</a></li>

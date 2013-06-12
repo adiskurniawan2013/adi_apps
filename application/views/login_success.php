@@ -16,9 +16,9 @@
     You are loged in as: <strong>
     <?php echo $username ?>
     </strong><br />
-    <br />
+    
     You can now proceed to <a href="<?php echo base_url('site') ?>">Admin control panel</a>.<br />
-    <br />
+    
   </div>
 </div>
 </body>

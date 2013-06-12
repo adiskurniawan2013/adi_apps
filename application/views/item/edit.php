@@ -7,7 +7,7 @@ $(document).ready(function() {
 		//display loading
 		$("#loading div").fadeIn(300);
 		$.ajax({
-			url		:	"<?php echo base_url('items/submit/'.@$item_id) ?>",
+			url		:	"<?php echo base_url('item/submit/'.@$item_id) ?>",
 			type	:	"POST",
 			dataType:	"json",
 			data	:	querystr,
@@ -21,7 +21,7 @@ $(document).ready(function() {
 					if(!data.is_valid) {
 						$.validationEngine.buildPrompt('#name','Already exists.','error');
 					} else {
-						load_content('items','#tab_loader');
+						load_content('item','#tab_loader');
 					}
 				}
 			}//END SUCCESS
@@ -37,36 +37,25 @@ $(document).ready(function() {
 
 });
 
-//this process of tab_load processes as follows:
-//1- hide the form_loader (which contains the form)
-//2- load the tab page into tab_loader div
-//3- when go back to the form_loader tab gust show that form again
-//4- hide the tab_loader div
-
-$('#info').click(function (){
-	$('#tab_loader').fadeOut(300, function(){
-		$('#form_loader').fadeIn('slow');
-	});
-});
 </script>
 
 <div style="height:0px"></div>
 
 <div class="form_block" id="form_block_1" style="width:900px; margin-left:22px; margin-top:2px;">
 
-<div class="form_title"><?php echo @$item_id?@$name:"New item" ?>
-	<div style="float:right; padding: 0;"><a href="javascript:load_content('items','#tab_loader')"><img src="<?php echo base_url() ?>images/fileclose.png" width="17.5" height="17.5" border="0"/></a></div>
+<div class="form_title"><?php echo @$item_id?"Edit Item: ".@$name:"New item" ?>
+	<div style="float:right; padding: 0;"><a href="javascript:load_content('item','#tab_loader')"><img src="<?php echo base_url() ?>images/fileclose.png" width="17.5" height="17.5" border="0"/></a></div>
 </div> 
 
-<div class="form" style="height:350px;">
+<div class="form" style="height:430px;">
 	<div id="form_loader">
-		<form action="<?php echo base_url('items/submit/'.@$item_id) ?>" method="post" onsubmit="return false" id="form">
+		<form action="<?php echo base_url('item/submit/'.@$item_id) ?>" method="post" onsubmit="return false" id="form">
 			
 			<div style="height:12px"></div>
 
 			<div id="rowContent"></div> 
 			<div style="float:left; width:48%;">
-				<div id="rowContentInner">
+				<div id="rowContentInner" style="height:360px;">
 				    <div id="contentBoxTwoEdit">
 						<table class="editTable">
 							<tr>
@@ -74,7 +63,7 @@ $('#info').click(function (){
 									Name:
 								</td>
 								<td class="cellRightEditTable">
-									<input type="text" id="name" name="name" value="<?php echo @$name ?>" class="validate[required,length[3,32]]">
+									<input type="text" id="name" name="name" value="<?php echo @$name ?>" class="validate[required,length[3,100]]">
 								</td>
 							</tr>
 							<tr>
@@ -125,6 +114,15 @@ $('#info').click(function (){
 									<input type="text" id="unit_price" name="unit_price" value="<?php echo @$unit_price ?>">
 								</td>
 							</tr>
+							<tr>
+								<td class="cellLeftEditTable">
+									
+								</td>
+								<td class="cellRightEditTable">
+									<br/><br/><br/>
+								</td>
+
+							</tr>
 						</table>
 					</div>
 				</div>
@@ -132,10 +130,10 @@ $('#info').click(function (){
 
 			<div style="float:right; width:48%;">
 
-				<div id="rowContentInner">
+				<div id="rowContentInner" style="height:360px;">
 				    <div id="contentBoxTwoEdit">
 						<table class="editTable">
-							<?php $item_tax_info = $this->m_item_taxes->get_info(@$item_id) ?>
+							<?php $item_tax_info = $this->item_tax_m->get_info(@$item_id) ?>
 							<tr>
 								<td class="cellLeftEditTable">
 									Tax 1:
@@ -225,7 +223,7 @@ $('#info').click(function (){
 							</tr>
 							<tr>
 								<td class="cellLeftEditTable">
-									Item has Serial Number:
+									Has Serial Number:
 								</td>
 								<td class="cellRightEditTable">
 									<input type="text" id="is_serialized" name="is_serialized" value="<?php echo @$is_serialized ?>">
@@ -236,13 +234,13 @@ $('#info').click(function (){
 				</div>
 			</div>
 		
-			<br/><br/><br/>
+			<br/><br/>
 							
 			<div>
 				<label for="submit">&nbsp;</label>
 				<input type="submit" value="Submit" style="margin-left:242px"/>
 				&nbsp;&nbsp;
-				<input name="cancel" type="button" id="cancel" value="Cancel" onclick="javascript:load_content('items','#tab_loader')"/>
+				<input name="cancel" type="button" id="cancel" value="Cancel" onclick="javascript:load_content('item','#tab_loader')"/>
 			</div> 
 				
 		</form>

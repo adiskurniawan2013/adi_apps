@@ -323,6 +323,7 @@ background: url(images/minus.png) no-repeat left center;
  
 #login_form, #login_success, #warning{
 	width:350px;
+	height:auto;
 }
 #login_form .form label{
 	width: 80px;
@@ -337,7 +338,7 @@ background: url(images/minus.png) no-repeat left center;
 	background-color: #FF3300;
 }
 #login_form input[type="text"], #login_form input[type="password"] {
-	width: 150px;
+	width: 170px;
 }
 #loading {
 	text-align: left;
@@ -442,13 +443,17 @@ font: bold 9px Verdana, sans-serif;
 }
 
 
-
+/*
 ul.nav li.dropdown:hover ul.dropdown-menu { display: block; }
+
+
 h1 a{ display: inline-block; background: url('../images/darth_vader.jpg') no-repeat; height: 70px; padding: 20px 0 0 90px; color: black; }
 h1 a:hover { text-decoration: none; color: black; }
 h2 a { color: black; }
 
 h1, h2, h3 { font-family: georgia, serif; }
+*/
+
 p.pubdate { font-style: italic; font-size: 0.9em; }
 
 .sidebar h3 { font-size: 1em; line-height: 1.2em; margin-bottom: 0; }

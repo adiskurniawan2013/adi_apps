@@ -46,7 +46,7 @@ $(document).ready(function() {
 <div id="container">
   <div class="form_block" id="login_form">
 	<div class="form_title">Admin Login</div>
-	<div class="form">
+	<div class="form" style="height:110px;">
 	<form action="<?php echo base_url('login/submit') ?>" method="post" onsubmit="return false" id="form">
 		<br />
 		

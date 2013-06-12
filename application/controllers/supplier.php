@@ -6,9 +6,6 @@ class Supplier extends CI_Controller {
         if (!sess_var('is_logged_in')) {
             redirect('login');
         }
-        $this->load->library('datatables');
-        $this->load->library('table');
-        $this->load->database();
     }
     
     function index() {
@@ -22,7 +19,6 @@ class Supplier extends CI_Controller {
         ->from('suppliers')
         ->join('people', 'suppliers.person_id = people.person_id')           
         ->where('suppliers.deleted', 0)
-        ->unset_column('suppliers.person_id')
         ->add_column('Actions', get_buttons('$1', strtolower(get_class())),'suppliers.person_id');
 
         echo $this->datatables->generate();

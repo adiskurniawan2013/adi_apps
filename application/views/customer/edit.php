@@ -43,11 +43,11 @@ $(document).ready(function() {
 
 <div class="form_block" id="form_block_1" style="width:900px; margin-left:22px; margin-top:2px;">
 
-<div class="form_title"><?php echo @$person_id?@$first_name:"New Customer" ?>
+<div class="form_title"><?php echo @$person_id?"Edit Customer: ".@$first_name:"New Customer" ?>
 	<div style="float:right; padding: 0;"><a href="javascript:load_content('customer','#tab_loader')"><img src="<?php echo base_url() ?>images/fileclose.png" width="17.5" height="17.5" border="0"/></a></div>
 </div> 
 
-<div class="form" style="height:350px;">
+<div class="form" style="height:360px;">
 	<div id="form_loader">
 		<form action="<?php echo base_url('customer/submit/'.@$person_id) ?>" method="post" onsubmit="return false" id="form">
 			
@@ -55,7 +55,7 @@ $(document).ready(function() {
 
 			<div id="rowContent"></div> 
 			<div style="float:left; width:48%;">
-				<div id="rowContentInner">
+				<div id="rowContentInner" style="height:285px;">
 				    <div id="contentBoxTwoEdit">
 						<table class="editTable">
 							<tr>
@@ -121,8 +121,8 @@ $(document).ready(function() {
 
 			<div style="float:right; width:48%;">
 
-				<div id="rowContentInner">
-				    <div id="contentBoxTwoEdit">
+				<div id="rowContentInner" style="height:285px;">
+				    <div id="contentBoxTwoEdit" >
 						<table class="editTable">
 							<tr>
 								<td class="cellLeftEditTable">
@@ -171,13 +171,24 @@ $(document).ready(function() {
 								<td class="cellRightEditTable">
 									<input type="text" id="comments" name="comments" value="<?php echo @$comments ?>">
 								</td>
+
 							</tr>
+							<tr>
+								<td class="cellLeftEditTable">
+									
+								</td>
+								<td class="cellRightEditTable">
+									<br/>
+								</td>
+
+							</tr>
+
 						</table>
 					</div>
 				</div>
 			</div>
 		
-			<br/><br/><br/>
+			<br/><br/>
 							
 			<div>
 				<label for="submit">&nbsp;</label>

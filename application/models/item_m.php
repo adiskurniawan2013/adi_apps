@@ -12,13 +12,13 @@ class Item_m extends CI_Model {
 	}
 
 	// Returns all the items
-	 	function get_all($limit=50, $offset=3) {
-		// function get_all() {
+	// function get_all($limit=50, $offset=3) {
+	function get_all() {
 		$this->db->from('items');
 		$this->db->where('deleted',0);
-		$this->db->order_by("name", "asc");
-		$this->db->limit($limit);
-		$this->db->offset($offset);
+		// $this->db->order_by("name", "asc");
+		// $this->db->limit($limit);
+		// $this->db->offset($offset);
 		// return $this->db->get();
 
 		$query = $this->db->get();
@@ -108,8 +108,7 @@ class Item_m extends CI_Model {
 	/*
 	Gets information about multiple items
 	*/
-	function get_multiple_info($item_ids)
-	{
+	function get_multiple_info($item_ids) {
 		$this->db->from('items');
 		$this->db->where_in('item_id',$item_ids);
 		$this->db->order_by("item", "asc");
@@ -164,7 +163,7 @@ class Item_m extends CI_Model {
                 'trans_comment'=>'manual editing',
                 'trans_inventory'=>$cur_item_info ? $this->input->post('quantity') - $cur_item_info->quantity : $this->input->post('quantity')
             );
-        $this->m_inventories->insert($inv_data);
+        $this->inventory_m->insert($inv_data);
 
         $items_taxes_data = array();
         $tax_names = $this->input->post('tax_names');
@@ -174,7 +173,7 @@ class Item_m extends CI_Model {
                 $items_taxes_data[] = array('name'=>$tax_names[$k], 'percent'=>$tax_percents[$k] );
             }
         }
-        $this->m_item_taxes->save($items_taxes_data, $item_id);
+        $this->item_tax_m->save($items_taxes_data, $item_id);
 
         return $this->db->_error_number();
     }
@@ -209,7 +208,7 @@ class Item_m extends CI_Model {
                 'trans_comment'=>'manual editing',
                 'trans_inventory'=>$cur_item_info ? $this->input->post('quantity') - $cur_item_info->quantity : $this->input->post('quantity')
             );
-        $this->m_inventories->insert($inv_data);
+        $this->inventory_m->insert($inv_data);
 
         $items_taxes_data = array();
         $tax_names = $this->input->post('tax_names');
@@ -219,18 +218,15 @@ class Item_m extends CI_Model {
                 $items_taxes_data[] = array('name'=>$tax_names[$k], 'percent'=>$tax_percents[$k] );
             }
         }
-        $this->m_item_taxes->save($items_taxes_data, $item_id);
+        $this->item_tax_m->save($items_taxes_data, $item_id);
 
         return $this->db->_error_number();
     }
 
-
-
 	/*
 	Updates multiple items at once
 	*/
-	function update_multiple($item_data, $item_ids)
-	{
+	function update_multiple($item_data, $item_ids)	{
 		$this->db->where_in('item_id',$item_ids);
 		return $this->db->update('items',$item_data);
 	}
@@ -238,8 +234,7 @@ class Item_m extends CI_Model {
 	/*
 	Deletes one item
 	*/
-	function delete($item_id)
-	{
+	function delete($item_id) {
 		$this->db->where('item_id', $item_id);
 		return $this->db->update('items', array('deleted' => 1));
 	}
@@ -247,127 +242,12 @@ class Item_m extends CI_Model {
 	/*
 	Deletes a list of items
 	*/
-	function delete_list($item_ids)
-	{
+	function delete_list($item_ids)	{
 		$this->db->where_in('item_id',$item_ids);
 		return $this->db->update('items', array('deleted' => 1));
  	}
 
- 	/*
-	Get search suggestions to find items
-	*/
-	function get_search_suggestions($search,$limit=25)
-	{
-		$suggestions = array();
-
-		$this->db->from('items');
-		$this->db->like('name', $search);
-		$this->db->where('deleted',0);
-		$this->db->order_by("name", "asc");
-		$by_name = $this->db->get();
-		foreach($by_name->result() as $row)
-		{
-			$suggestions[]=$row->name;
-		}
-
-		$this->db->select('category');
-		$this->db->from('items');
-		$this->db->where('deleted',0);
-		$this->db->distinct();
-		$this->db->like('category', $search);
-		$this->db->order_by("category", "asc");
-		$by_category = $this->db->get();
-		foreach($by_category->result() as $row)
-		{
-			$suggestions[]=$row->category;
-		}
-
-		$this->db->from('items');
-		$this->db->like('item_number', $search);
-		$this->db->where('deleted',0);
-		$this->db->order_by("item_number", "asc");
-		$by_item_number = $this->db->get();
-		foreach($by_item_number->result() as $row)
-		{
-			$suggestions[]=$row->item_number;
-		}
-
-
-		//only return $limit suggestions
-		if(count($suggestions > $limit))
-		{
-			$suggestions = array_slice($suggestions, 0,$limit);
-		}
-		return $suggestions;
-
-	}
-
-	function get_item_search_suggestions($search,$limit=25)
-	{
-		$suggestions = array();
-
-		$this->db->from('items');
-		$this->db->where('deleted',0);
-		$this->db->like('name', $search);
-		$this->db->order_by("name", "asc");
-		$by_name = $this->db->get();
-		foreach($by_name->result() as $row)
-		{
-			$suggestions[]=$row->item_id.'|'.$row->name;
-		}
-
-		$this->db->from('items');
-		$this->db->where('deleted',0);
-		$this->db->like('item_number', $search);
-		$this->db->order_by("item_number", "asc");
-		$by_item_number = $this->db->get();
-		foreach($by_item_number->result() as $row)
-		{
-			$suggestions[]=$row->item_id.'|'.$row->item_number;
-		}
-
-		//only return $limit suggestions
-		if(count($suggestions > $limit))
-		{
-			$suggestions = array_slice($suggestions, 0,$limit);
-		}
-		return $suggestions;
-
-	}
-
-	function get_category_suggestions($search)
-	{
-		$suggestions = array();
-		$this->db->distinct();
-		$this->db->select('category');
-		$this->db->from('items');
-		$this->db->like('category', $search);
-		$this->db->where('deleted', 0);
-		$this->db->order_by("category", "asc");
-		$by_category = $this->db->get();
-		foreach($by_category->result() as $row)
-		{
-			$suggestions[]=$row->category;
-		}
-
-		return $suggestions;
-	}
-
-	/*
-	Preform a search on items
-	*/
-	function search($search)
-	{
-		$this->db->from('items');
-		$this->db->where("(name LIKE '%".$this->db->escape_like_str($search)."%' or 
-		item_number LIKE '%".$this->db->escape_like_str($search)."%' or 
-		category LIKE '%".$this->db->escape_like_str($search)."%') and deleted=0");
-		$this->db->order_by("name", "asc");
-		return $this->db->get();	
-	}
-
-	function get_categories()
-	{
+	function get_categories() {
 		$this->db->select('category');
 		$this->db->from('items');
 		$this->db->where('deleted',0);

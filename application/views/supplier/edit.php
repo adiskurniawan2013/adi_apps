@@ -43,11 +43,11 @@ $(document).ready(function() {
 
 <div class="form_block" id="form_block_1" style="width:900px; margin-left:22px; margin-top:2px;">
 
-<div class="form_title"><?php echo @$person_id?@$first_name:"New Supplier" ?>
+<div class="form_title"><?php echo @$person_id?"Edit Supplier: ".@$first_name:"New Supplier" ?>
 	<div style="float:right; padding: 0;"><a href="javascript:load_content('supplier','#tab_loader')"><img src="<?php echo base_url() ?>images/fileclose.png" width="17.5" height="17.5" border="0"/></a></div>
 </div> 
 
-<div class="form" style="height:350px;">
+<div class="form" style="height:360px;">
 	
 	<div id="form_loader">
 
@@ -58,7 +58,7 @@ $(document).ready(function() {
 			<div id="rowContent"></div> 
 			
 			<div style="float:left; width:48%;">
-				<div id="rowContentInner">
+				<div id="rowContentInner" style="height:285px;">
 				    <div id="contentBoxTwoEdit">
 						<table class="editTable">
 							<tr>
@@ -117,13 +117,14 @@ $(document).ready(function() {
 									<input type="text" id="city" name="city" value="<?php echo @$city ?>">
 								</td>
 							</tr>
+
 						</table>
 					</div>
 				</div>
 			</div>
 
 			<div style="float:right; width:48%;">
-				<div id="rowContentInner">
+				<div id="rowContentInner" style="height:285px;">
 				    <div id="contentBoxTwoEdit">
 						<table class="editTable">
 							<tr>
@@ -166,12 +167,28 @@ $(document).ready(function() {
 									<input type="text" id="comments" name="comments" value="<?php echo @$comments ?>">
 								</td>
 							</tr>
+							<tr>
+								<td class="cellLeftEditTable">
+									
+								</td>
+								<td class="cellRightEditTable">
+									<br/>
+								</td>
+							</tr>
+							<tr>
+								<td class="cellLeftEditTable">
+									
+								</td>
+								<td class="cellRightEditTable">
+									<br/>
+								</td>
+							</tr>
 						</table>
 					</div>
 				</div>
 			</div>
 		
-			<br/><br/><br/>
+			<br/><br/>
 							
 			<div>
 				<label for="submit">&nbsp;</label>

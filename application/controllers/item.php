@@ -1,27 +1,56 @@
 <?php
-class Items extends CI_Controller {
+class Item extends CI_Controller {
     
     function __construct() {
         parent::__construct();
         if (!sess_var('is_logged_in')) {
             redirect('login');
         }
-      
     }
     
+    /*
     function index() {
-        $result = $this->m_items->get_all();
-        $data   = array('main_content'=>'items/v_items', 'items'=>$result);
+        $result = $this->item_m->get_all();
+        $data   = array('main_content'=>'item/index', 'items'=>$result);
+        $this->load->view("loader", $data);
+    }
+    */
+
+    function index() {
+        $data   = array('main_content'=>'item/index');
         $this->load->view("loader", $data);
     }
 
+    //function to handle callbacks
+    function datatable() {
+        $this->datatables->select('item_id, name, category, unit_price, quantity')
+        ->from('items')
+        ->where('deleted',0)
+        ->edit_column('unit_price', align_right('$1'), 'to_currency(unit_price)')
+        ->edit_column('quantity', align_right('$1'),'number_format(quantity,0)')
+        ->add_column('Tax_percents', align_right('$1'),'to_tax_percents(item_id)')
+        ->add_column('Actions', get_buttons('$1', strtolower(get_class())),'item_id');
 
+        echo $this->datatables->generate();
+    }
 
+    function add() {
+        $this->load->view("loader",array('main_content'=>"item/edit"));
+    }
 
-
-
-
-
+    function edit($item_id='') {
+        if(! $item_id) {
+            echo "ID required";
+            return;
+        }
+        $result =   $this->item_m->get_item($item_id);
+        if( ! $result) {
+            echo "Nothing to edit";
+            return;
+        }
+        $result['main_content'] =   "item/edit";
+        $this->load->view("loader",$result);
+    }
 
 
 
@@ -41,25 +70,6 @@ class Items extends CI_Controller {
         $data['manage_table']=get_items_manage_table($this->Item->get_all_filtered($low_inventory,$is_serialized,$no_description),$this);
         $this->load->view('items/manage',$data);
     }
-
-    function add() {
-        $this->load->view("loader",array('main_content'=>"item/edit"));
-    }
-
-    function edit($item_id='') {
-        if(! $item_id) {
-            echo "ID required";
-            return;
-        }
-        $result =   $this->m_items->get_item($item_id);
-        if( ! $result) {
-            echo "Nothing to edit";
-            return;
-        }
-        $result['main_content'] =   "item/edit";
-        $this->load->view("loader",$result);
-    }
-
 
 
     function find_item_info()
@@ -219,10 +229,10 @@ class Items extends CI_Controller {
             echo json_encode($data);
         } else {
             if($item_id){
-                $result     =   $this->m_items->update($item_id);
+                $result     =   $this->item_m->update($item_id);
                 $content    =   "Item has been UPDATED successfully.";
             } else {
-                $result     =   $this->m_items->add();
+                $result     =   $this->item_m->add();
                 $content    =   "Item has been CREATED successfully.";
             }
             //if duplicate key
@@ -316,17 +326,13 @@ class Items extends CI_Controller {
         }
     }
 
-    function delete()
-    {
+    function delete() {
         $items_to_delete=$this->input->post('ids');
 
-        if($this->Item->delete_list($items_to_delete))
-        {
+        if($this->item_m->delete_list($items_to_delete)) {
             echo json_encode(array('success'=>true,'message'=>$this->lang->line('items_successful_deleted').' '.
             count($items_to_delete).' '.$this->lang->line('items_one_or_multiple')));
-        }
-        else
-        {
+        } else {
             echo json_encode(array('success'=>false,'message'=>$this->lang->line('items_cannot_be_deleted')));
         }
     }

@@ -39,7 +39,7 @@
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('table','database','form_validation','session', 'email', 'user_agent', 'pagination', 'smarty');
+$autoload['libraries'] = array('datatables', 'table', 'database','form_validation','session', 'email', 'user_agent', 'pagination', 'smarty');
 
 /*
 | -------------------------------------------------------------------
@@ -50,7 +50,7 @@ $autoload['libraries'] = array('table','database','form_validation','session', '
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('form','url','table','date', 'text','currency','security','lib', 'html', 'download', 'csv', 'datatables');
+$autoload['helper'] = array('form','url','table','date', 'text', 'security','lib', 'html', 'download', 'csv', 'datatables');
 
 /*
 | -------------------------------------------------------------------

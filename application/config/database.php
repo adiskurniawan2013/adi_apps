@@ -43,10 +43,10 @@ $db['default']['password'] = "";
 $db['default']['database'] = "adi_apps";
 
 /*
-$db['default']['hostname'] = 'sql2.freemysqlhosting.net';
-$db['default']['username'] = 'sql210565';
-$db['default']['password'] = 'iK2*kB8*';
-$db['default']['database'] = 'sql210565';
+$db['default']['hostname'] = 'db4free.net';
+$db['default']['username'] = 'adisk';
+$db['default']['password'] = 'firas0808';
+$db['default']['database'] = 'shopping';
 */
 
 $db['default']['dbdriver'] = "mysql";
